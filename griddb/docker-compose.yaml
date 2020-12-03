@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  griddb:
+    container_name: docker
+    image: griddb
+    network_mode: "bridge"
+    volumes:
+      - "vol:/var/lib/gridstore"
+
+volumes:
+    vol:
+
