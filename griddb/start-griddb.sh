@@ -11,6 +11,25 @@ save_config() {
     echo "GRIDDB_PASSWORD=\"$GRIDDB_PASSWORD\""         >> /var/lib/gridstore/conf/gridstore.conf
 }
 
+# Get Ip Address
+get_ipadress() {
+    # Get ip address of machine
+    ip_address=$(hostname -I | awk '{print $1}')
+}
+
+# Config for fixed_list method
+fixlist_config() {
+    # Remove "notificationAddress" and "notificationPort"
+    jq 'del(.cluster.notificationAddress) | del(.cluster.notificationPort)' /var/lib/gridstore/conf/gs_cluster.json | tee tmp.json
+
+    # Config notification member for Fix_List method
+    jq '.cluster |= .+ {"notificationMember": [{"cluster":{"address", "port":10010}, "sync":{"address","port":10020}, "system":{"address", "port":10040}, "transaction":{"address", "port":10001}, "sql":{"address", "port":20001}}]}' tmp.json | tee tmp_gs_cluster.json
+    mv tmp_gs_cluster.json /var/lib/gridstore/conf/gs_cluster.json
+    rm tmp.json
+    # Set ip address
+    sed -i -e s/\"address\":\ null/\"address\":\"$ip_address\"/g \/var/lib/gridstore/conf/gs_cluster.json
+}
+
 # First parameter after run images
 if [ "${1}" = 'griddb' ]; then
 
@@ -26,7 +45,7 @@ if [ "${1}" = 'griddb' ]; then
 
         # Extra modification based on environment variable
         gs_passwd $GRIDDB_USERNAME -p $GRIDDB_PASSWORD
-        sed -i -e s/\"clusterName\":\"\"/\"clusterName\":\"$GRIDDB_CLUSTER_NAME\"/g \/var/lib/gridstore/conf/gs_cluster.json
+        sed -i -e s/\"clusterName\":\"myCluster\"/\"clusterName\":\"$GRIDDB_CLUSTER_NAME\"/g \/var/lib/gridstore/conf/gs_cluster.json
 
         # MULTICAST mode
         if [ ! -z $NOTIFICATION_ADDRESS ]; then
@@ -41,13 +60,21 @@ if [ "${1}" = 'griddb' ]; then
 
         # FIXED_LIST mode
         if [ ! -z $NOTIFICATION_MEMBER ]; then
-            echo "FIXED_LIST mode, not suported"
-            exit 1
+            echo "Fix List mode"
+            if [ $NOTIFICATION_MEMBER != 1 ]; then
+                echo "$NOTIFICATION_MEMBER invalid. Fix list GridDB CE mode support one member, please check again !"
+                exit 1
+            fi
+            checkFixList=$(cat /var/lib/gridstore/conf/gs_cluster.json | grep notificationMember)
+            if [ ! -z checkFixList ]; then
+                get_ipadress
+                fixlist_config
+            fi
         fi
 
         # PROVIDER mode
         if [ ! -z $NOTIFICATION_PROVIDER ]; then
-            echo "PROVIDER mode, not supported"
+            echo "Provider mode haven't support"
             exit 1
         fi
 
@@ -66,4 +93,3 @@ if [ "${1}" = 'griddb' ]; then
     tail -f /var/lib/gridstore/log/gsstartup.log
 fi
 exec "$@"
-
