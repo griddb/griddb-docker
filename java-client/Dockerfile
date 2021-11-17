@@ -15,6 +15,7 @@ RUN wget https://raw.githubusercontent.com/griddb/griddb_nosql/master/docs/sampl
     && cp Sample1.java /root/gsSample/.
 
 COPY run-griddb.sh /root/.
+COPY Sample1_fixlist.java /root/gsSample/.
 
 WORKDIR /root
 
@@ -22,7 +23,7 @@ WORKDIR /root
 RUN chmod a+x run-griddb.sh
 
 # Get dependency for griddb java-client
-RUN mvn dependency:get -Dartifact=com.github.griddb:gridstore:4.5.0 -Ddest=./gridstore.jar
+RUN mvn dependency:get -Dartifact=com.github.griddb:gridstore:4.6.1 -Ddest=./gridstore.jar
 
 # Run sample
 CMD ["/bin/bash", "run-griddb.sh"]
