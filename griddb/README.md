@@ -1,14 +1,14 @@
 # Supported tags and respective Dockerfile links
-* [4.6.1-bionic](https://github.com/griddb/griddb-docker/blob/main/griddb/4.6/bionic/Dockerfile)
+* [4.6.1-bionic, latest](https://github.com/griddb/griddb-docker/blob/main/griddb/4.6/bionic/Dockerfile)
 * [4.6.1-focal](https://github.com/griddb/griddb-docker/blob/main/griddb/4.6/focal/Dockerfile)
 * [4.6.1-centos8](https://github.com/griddb/griddb-docker/blob/main/griddb/4.6/centos8/Dockerfile)
 * [4.6.1-centos7](https://github.com/griddb/griddb-docker/blob/main/griddb/4.6/centos7/Dockerfile)
-* [4.5.2-bionic, latest](https://github.com/griddb/griddb-docker/blob/main/griddb/4.5/bionic/Dockerfile)
+* [4.5.2-bionic](https://github.com/griddb/griddb-docker/blob/main/griddb/4.5/bionic/Dockerfile)
 * [4.5.2-centos7](https://github.com/griddb/griddb-docker/blob/main/griddb/4.5/centos7/Dockerfile)
 
 # What is GridDB?
 
-GridDB is Database for IoT with both NoSQL interface and SQL Interface.
+[GridDB](https://github.com/griddb/griddb) is Database for IoT with both NoSQL interface and SQL Interface.
 Please refer to [GridDB Features Reference](https://github.com/griddb/docs-en/blob/master/manuals/GridDB_FeaturesReference.md) for functionality.
 This repository includes server and Java client. And [jdbc repository](https://github.com/griddb/jdbc) includes JDBC Driver.
 
