@@ -59,11 +59,9 @@ if [ "${1}" = 'griddb' ]; then
     . /var/lib/gridstore/conf/gridstore.conf
 
     # Start service
-    gs_startnode -u $GRIDDB_USERNAME/$GRIDDB_PASSWORD -w
-    gs_joincluster -c $GRIDDB_CLUSTER_NAME -u $GRIDDB_USERNAME/$GRIDDB_PASSWORD -w
-
-    # Wait
-    tail -f /var/lib/gridstore/log/gsstartup.log
+    cd /var/lib/gridstore
+    sleep 5 && gs_joincluster -u $GRIDDB_USERNAME/$GRIDDB_PASSWORD -c $GRIDDB_CLUSTER_NAME -w &
+    gsserver --conf ./conf
 fi
 exec "$@"
 
