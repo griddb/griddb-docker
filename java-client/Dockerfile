@@ -6,11 +6,11 @@ ENV MAVEN_BASE=apache-maven-${MAVEN_VERSION}
 ENV PATH=$PATH:/opt/maven/bin
 
 # Download and install maven
-RUN curl -OL https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/${MAVEN_BASE}-bin.tar.gz &&\
-    tar zxvf ${MAVEN_BASE}-bin.tar.gz && mv $MAVEN_BASE /opt/maven
+RUN wget -q https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/${MAVEN_BASE}-bin.tar.gz \
+    && tar zxvf ${MAVEN_BASE}-bin.tar.gz && mv $MAVEN_BASE /opt/maven
 
 # Download sample for griddb java client
-RUN wget https://raw.githubusercontent.com/griddb/griddb_nosql/master/docs/sample/program/Sample1.java \
+RUN wget -q https://raw.githubusercontent.com/griddb/griddb_nosql/master/docs/sample/program/Sample1.java \
     && mkdir -p /root/gsSample \
     && cp Sample1.java /root/gsSample/.
 
@@ -19,11 +19,11 @@ COPY Sample1_fixlist.java /root/gsSample/.
 
 WORKDIR /root
 
-# Set permission executable for script
-RUN chmod a+x run-griddb.sh
-
-# Get dependency for griddb java-client
-RUN mvn dependency:get -Dartifact=com.github.griddb:gridstore:4.6.1 -Ddest=./gridstore.jar
+RUN set -eux \
+    # Set permission executable for script
+    && chmod a+x run-griddb.sh \
+    # Get dependency for griddb java-client
+    && mvn dependency:get -Dartifact=com.github.griddb:gridstore:5.0.0 -Ddest=./gridstore.jar
 
 # Run sample
 CMD ["/bin/bash", "run-griddb.sh"]

@@ -28,7 +28,7 @@ if [ -z "$IP_NOTIFICATION_MEMBER" ]; then
     javac gsSample/Sample1.java
     java gsSample/Sample1 $NOTIFICATION_ADDRESS $NOTIFICATION_PORT $GRIDDB_CLUSTER_NAME $GRIDDB_USERNAME $GRIDDB_PASSWORD
 else
-    echo "Run sample GridDB java client with GridDB server mode Fix_List : $IP_NOTIFICATION_MEMBER:10001 $GRIDDB_CLUSTER_NAME $GRIDDB_USERNAME $GRIDDB_PASSWORD"
+    echo "Run sample GridDB java client with GridDB server mode Fixed_List : $IP_NOTIFICATION_MEMBER:10001 $GRIDDB_CLUSTER_NAME $GRIDDB_USERNAME $GRIDDB_PASSWORD"
     javac gsSample/Sample1_fixlist.java
     java gsSample/Sample1_fixlist $IP_NOTIFICATION_MEMBER:10001 $GRIDDB_CLUSTER_NAME $GRIDDB_USERNAME $GRIDDB_PASSWORD
 fi
