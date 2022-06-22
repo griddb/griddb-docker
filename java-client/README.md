@@ -1,5 +1,6 @@
 # Supported tags and respective Dockerfile links
-* [4.6.1, latest](https://github.com/griddb/griddb-docker/tree/main/java-client)
+* [5.0.0](https://github.com/griddb/griddb-docker/tree/main/java-client)
+* [4.6.1, latest](https://github.com/griddb/griddb-docker/commit/ea6d2cf874368f37ac408544aabdedac9a4e7774)
 * [4.5.0](https://github.com/griddb/griddb-docker/commit/b18cd3fa341c695189f7dc84cf27729ad3912f10)
 
 # Overview GridDB java?
@@ -34,8 +35,7 @@ All method of docker GridDB java
   | MODE        | STATUS(default) |
   |-------------|-----------------|
   | MULTICAST   |        ON       |
-  | FIX LIST    |        OFF      |
-  | PROVIDER    |        OFF      |
+  | FIXED LIST  |        OFF      |
   |             |                 |
 
 ## About run GridDB java with connection method
@@ -59,14 +59,14 @@ docker run --name container_name \
     griddb/java
 ```
 
-### GridDB java run sample with fix list mode
+### GridDB java run sample with fixed list mode
 
-Run images GridDB java simple with fix list mode
+Run images GridDB java simple with fixed list mode
 ```console
 $ docker run --network="host" -e IP_NOTIFICATION_MEMBER="10.10.xx.xx" griddb/java
 ```
 
-Run image GridDB java with environment config for fix list mode
+Run image GridDB java with environment config for fixed list mode
 
 ```console
 docker run --name container_name \
@@ -78,7 +78,7 @@ docker run --name container_name \
     griddb/java
 ```
 Note :
-* GridDB server version 4.5&4.6 CE support 1 member for fix list method.
+* GridDB server version 4.5, 4.6 and 5.0 CE support 1 member for fixed list method.
 * GridDB use option --network="host" to forward ports.
 
 # Execute a sample program
@@ -96,7 +96,7 @@ Output :
 --> Person:  name=name02 status=false count=2 lob=[65, 66, 67, 68, 69, 70, 71, 72, 73, 74]
 ```
 
-### Fix list method
+### Fixed list method
 
 ```console
 $ docker run -d --network="host" -e NOTIFICATION_MEMBER=1 griddb/griddb
@@ -133,7 +133,7 @@ Note: After finshed to run step 2. Image GridDB java has:
 2. Mount current folder into docker container.
 3. Process docker image GridDB java will run hidden. Run command ```$ docker ps``` about show it.
 4. In command: The `pwd` is current path when run image. The "/root/." is path into docker container. This 2 value can change with user purpose
-5. With command step 2. GridDB java can docker execute for 2 method(multicast method and fix list method)
+5. With command step 2. GridDB java can docker execute for 2 method(multicast method and fixed list method)
 
 Step 3: Sample execute
 ```console

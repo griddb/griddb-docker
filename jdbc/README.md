@@ -1,5 +1,6 @@
 # Supported tags and respective Dockerfile links
-* [4.6.0, latest](https://github.com/griddb/griddb-docker/tree/main/jdbc)
+* [5.0.0](https://github.com/griddb/griddb-docker/tree/main/jdbc)
+* [4.6.0, latest](https://github.com/griddb/griddb-docker/commit/ea6d2cf874368f37ac408544aabdedac9a4e7774)
 * [4.5.0.1](https://github.com/griddb/griddb-docker/commit/0840c3334a1166bfe5618b512ddf2e6164d5a923)
 
 # Overview GridDB JDBC?
@@ -36,8 +37,7 @@ All method of docker GridDB JDBC
   | MODE        | STATUS(default) |
   |-------------|-----------------|
   | MULTICAST   |        ON       |
-  | FIX LIST    |        OFF      |
-  | PROVIDER    |        OFF      |
+  | FIXED LIST  |        OFF      |
   |             |                 |
 
 ## About run GridDB JDBC with connection method
@@ -61,14 +61,14 @@ docker run --name container_name \
     griddb/jdbc
 ```
 
-### GridDB run sample with fix list mode
+### GridDB run sample with fixed list mode
 
-Run images GridDB jdbc simple with fix list mode
+Run images GridDB jdbc simple with fixed list mode
 ```console
 $ docker run --network="host" -e IP_NOTIFICATION_MEMBER="10.10.xx.xx" griddb/jdbc
 ```
 
-Run image GridDB jdbc with environment config for fix list mode
+Run image GridDB jdbc with environment config for fixed list mode
 
 ```console
 docker run --name container_name \
@@ -80,7 +80,7 @@ docker run --name container_name \
     griddb/jdbc
 ```
 Note :
-* GridDB server version 4.5&4.6 CE support 1 member for fix list method.
+* GridDB server version 4.5, 4.6 and 5.0 CE support 1 member for fixed list method.
 * GridDB use option --network="host" to forward ports.
 
 # Execute a sample program (GriddB server on Ubuntu)
@@ -103,7 +103,7 @@ Output :
 ```
 
 
-### Fix list method
+### Fixed list method
 
 ```console
 $ docker run -d --network="host" -e NOTIFICATION_MEMBER=1 griddb/griddb
@@ -144,7 +144,7 @@ Note: After finshed to run step 2. Image GridDB jdbc has:
 2. Mount current folder into docker container.
 3. Process docker image GridDB jdbc will run hidden. Run command ```$ docker ps``` about show it.
 4. In command: The `pwd` is current path when run image. The "/root/." is path into docker container. This 2 value can change with user purpose
-5. With command step 2. GridDB jdbc can docker execute for 2 method(multicast method and fix list method)
+5. With command step 2. GridDB jdbc can docker execute for 2 method(multicast method and fixed list method)
 
 Step 3: Sample execute
 ```console

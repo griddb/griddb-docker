@@ -1,4 +1,7 @@
 # Supported tags and respective Dockerfile links
+* [5.0.0-bionic](https://github.com/griddb/griddb-docker/blob/main/griddb/5.0/bionic/Dockerfile)
+* [5.0.0-focal](https://github.com/griddb/griddb-docker/blob/main/griddb/5.0/focal/Dockerfile)
+* [5.0.0-centos7](https://github.com/griddb/griddb-docker/blob/main/griddb/5.0/centos7/Dockerfile)
 * [4.6.1-bionic, latest](https://github.com/griddb/griddb-docker/blob/main/griddb/4.6/bionic/Dockerfile)
 * [4.6.1-focal](https://github.com/griddb/griddb-docker/blob/main/griddb/4.6/focal/Dockerfile)
 * [4.6.1-centos8](https://github.com/griddb/griddb-docker/blob/main/griddb/4.6/centos8/Dockerfile)
@@ -38,7 +41,7 @@ All method of docker GridDB
   | MODE        | STATUS(default) |
   |-------------|-----------------|
   | MULTICAST   |        ON       |
-  | FIX LIST    |        OFF      |
+  | FIXED LIST  |        OFF      |
   |             |                 |
 
 ## About run GridDB with connection method
@@ -87,14 +90,14 @@ Try command line in current folder :
 $ docker-compose up
 ```
 
-### GridDB run with fix list mode
+### GridDB run with fixed list mode
 
-Run images GridDB server simple with fix list mode
+Run images GridDB server simple with fixed list mode
 ```console
 $ docker run --network="host" -e NOTIFICATION_MEMBER=1 griddb/griddb
 ```
 
-Run image GridDB server with environment config for fix list mode
+Run image GridDB server with environment config for fixed list mode
 
 ```console
 docker run --name container_name \
@@ -105,7 +108,7 @@ docker run --name container_name \
     griddb/griddb
 ```
 Note :
-* GridDB version 4.5 CE & 4.6 CE support 1 member for fix list method.
+* GridDB version 4.5, 4.6 and 5.0 CE support 1 member for fixed list method.
 * GridDB use option --network="host" to forward ports.
 
 # Execute a sample program (GriddB server on Ubuntu)
