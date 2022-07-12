@@ -4,8 +4,9 @@ FROM ubuntu:18.04
 ENV GRIDDB_VERSION=5.0.0
 ENV GRIDDB_DOWNLOAD_SHA512=a65c5a7ba4728aa970b4bad15b983ba11df2fe5bfc28fc8358210260fb249e2543f0adc423b8d8de643f61bb5bb6c12600f2f1bf98f529838db42a97f20b4284
 ENV GS_HOME=/var/lib/gridstore
+# Need declare $GS_LOG to start GridDB server
 ENV GS_LOG=/var/lib/gridstore/log
-ENV PORTS=10001
+ENV PORT=10001
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install griddb server
