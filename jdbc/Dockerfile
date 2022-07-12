@@ -9,9 +9,7 @@ RUN curl -OL https://archive.apache.org/dist/maven/maven-3/3.5.2/binaries/apache
     && tar zxvf ${MAVEN_BASE}-bin.tar.gz && mv $MAVEN_BASE /opt/maven
 
 WORKDIR /root
-COPY JDBCSelect.java /root/.
-COPY JDBCSelect_fixlist.java /root/.
-COPY run-griddb.sh /root/.
+COPY JDBCSelect.java JDBCSelect_fixlist.java run-griddb.sh /root/
 
 RUN set -eux \
     # Set permission executable for script
