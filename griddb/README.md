@@ -1,8 +1,8 @@
 # Supported tags and respective Dockerfile links
-* [5.0.0-bionic](https://github.com/griddb/griddb-docker/blob/main/griddb/5.0/bionic/Dockerfile)
+* [5.0.0-bionic, latest](https://github.com/griddb/griddb-docker/blob/main/griddb/5.0/bionic/Dockerfile)
 * [5.0.0-focal](https://github.com/griddb/griddb-docker/blob/main/griddb/5.0/focal/Dockerfile)
 * [5.0.0-centos7](https://github.com/griddb/griddb-docker/blob/main/griddb/5.0/centos7/Dockerfile)
-* [4.6.1-bionic, latest](https://github.com/griddb/griddb-docker/blob/main/griddb/4.6/bionic/Dockerfile)
+* [4.6.1-bionic](https://github.com/griddb/griddb-docker/blob/main/griddb/4.6/bionic/Dockerfile)
 * [4.6.1-focal](https://github.com/griddb/griddb-docker/blob/main/griddb/4.6/focal/Dockerfile)
 * [4.6.1-centos8](https://github.com/griddb/griddb-docker/blob/main/griddb/4.6/centos8/Dockerfile)
 * [4.6.1-centos7](https://github.com/griddb/griddb-docker/blob/main/griddb/4.6/centos7/Dockerfile)

@@ -1,6 +1,6 @@
 # Supported tags and respective Dockerfile links
-* [5.0.0](https://github.com/griddb/griddb-docker/tree/main/jdbc)
-* [4.6.0, latest](https://github.com/griddb/griddb-docker/commit/ea6d2cf874368f37ac408544aabdedac9a4e7774)
+* [5.0.0, latest](https://github.com/griddb/griddb-docker/tree/main/jdbc)
+* [4.6.0](https://github.com/griddb/griddb-docker/commit/ea6d2cf874368f37ac408544aabdedac9a4e7774)
 * [4.5.0.1](https://github.com/griddb/griddb-docker/commit/0840c3334a1166bfe5618b512ddf2e6164d5a923)
 
 # Overview GridDB JDBC?
