@@ -1,6 +1,8 @@
 FROM centos:centos7.9.2009
 
+ENV GRIDDB_C_VERSION=5.3.0
 ENV GRIDDB_NODE_API_VERSION=0.8.5
+ENV GRIDDB_C_DOWNLOAD_SHA512=b7418bfc7bab5269779012a252f5c7a8d537f02e320e8f61036afde7377426b0a3a46dac541ef075b759923d9dc061743d3799f352e9bc70494eb138a2f58559
 ENV GRIDDB_DOWNLOAD_SHA512=160747a49678693e3f2143584b1c53c97f00eedb69dbbf7c288f21d38361f25a35aac96a50d96cf701d6e50ab60c3f7f63f8f9376547a5c63283f014066ec85c
 ENV NODE_PATH=/root/node-api-${GRIDDB_NODE_API_VERSION}
 
@@ -13,10 +15,13 @@ RUN set -eux \
     && echo "source /opt/rh/devtoolset-9/enable" >> /etc/bashrc \
     && curl -sL https://rpm.nodesource.com/setup_16.x | bash - \
     && yum install -y nodejs \
-    && cd /etc/yum.repos.d/ \
-    && curl https://download.opensuse.org/repositories/home:/knonomura/CentOS_7/home:knonomura.repo -o /etc/yum.repos.d/home:knonomura.repo \
-    && yum install -y griddb-c-client \
     && yum clean all
+
+# Install GridDB C Client
+RUN curl -L https://github.com/griddb/c_client/releases/download/v${GRIDDB_C_VERSION}/griddb-c-client-${GRIDDB_C_VERSION}-linux.x86_64.rpm -o griddb-c-client-${GRIDDB_C_VERSION}-linux.x86_64.rpm \
+    && yum install -y ./griddb-c-client-${GRIDDB_C_VERSION}-linux.x86_64.rpm \
+    && yum clean all \
+    && rm griddb-c-client-${GRIDDB_C_VERSION}-linux.x86_64.rpm
 
 SHELL ["/bin/bash", "--login", "-c"]
 # Copy entrypoint script and sample for fixlist

@@ -1,11 +1,11 @@
 FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
-
+ENV GRIDDB_C_VERSION=5.3.0
 ENV GRIDDB_PHP_VERSION=0.8.1
 ENV SWIG_VERSION=4.1.0
 ENV PHP_VERSION=8.1
-
+ENV GRIDDB_C_DOWNLOAD_SHA512=a9a766c87851d1f3945fbc9706523399448d4517272cf9d9bc3415b4278d6d650b75c8c5446501d3cd6420c68b6e1887b7cb9a2cc42a6a357257cc0fd8cf6ee2
 ENV GRIDDB_PHP_DOWNLOAD_SHA512=5a7516ef41219163e64749f19187091bcff7fb4ae07b23844688398d87213b04c1410068355b4f9ce2c011f8ca82a28a66fc47b889d02891fc783c395479f690
 
 RUN set -eux \
@@ -22,12 +22,11 @@ RUN set -eux \
     && rm -rf /var/lib/apt/lists/*
 
 # Install GridDB C Client
-RUN echo 'deb http://download.opensuse.org/repositories/home:/knonomura/xUbuntu_18.04/ /' | tee /etc/apt/sources.list.d/home:knonomura.list \
-    && curl -fsSL https://download.opensuse.org/repositories/home:knonomura/xUbuntu_18.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_knonomura.gpg > /dev/null \
-    && apt-get -o Acquire::AllowInsecureRepositories=true -o Acquire::AllowDowngradeToInsecureRepositories=true update \
-    && apt-get install --no-install-recommends -y --allow-unauthenticated griddb-c-client \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN curl -L -k https://github.com/griddb/c_client/releases/download/v${GRIDDB_C_VERSION}/griddb-c-client_${GRIDDB_C_VERSION}_amd64.deb -o griddb-c-client_${GRIDDB_C_VERSION}_amd64.deb -sS \
+    && echo "$GRIDDB_C_DOWNLOAD_SHA512 griddb-c-client_${GRIDDB_C_VERSION}_amd64.deb" | sha512sum --strict --check \
+    && apt install --no-install-recommends -y --allow-unauthenticated ./griddb-c-client_${GRIDDB_C_VERSION}_amd64.deb \
+    && apt-get clean all \
+    && rm -rf /var/lib/apt/lists/* && rm griddb-c-client_${GRIDDB_C_VERSION}_amd64.deb
 
 WORKDIR /root
 

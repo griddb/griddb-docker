@@ -1,9 +1,11 @@
 FROM centos:centos7.9.2009
 
+ENV GRIDDB_C_VERSION=5.3.0
 ENV GRIDDB_GO_VERSION=0.8.4
 ENV SWIG_VERSION=4.0.2
 ENV GO_VERSION=1.16
 
+ENV GRIDDB_C_DOWNLOAD_SHA512=b7418bfc7bab5269779012a252f5c7a8d537f02e320e8f61036afde7377426b0a3a46dac541ef075b759923d9dc061743d3799f352e9bc70494eb138a2f58559
 ENV GRIDDB_GO_DOWNLOAD_SHA512=23da4e91507888132991d017277f461374b8191c8d5c16d77fc0ff44badbf0e89464eb56e666d17115334c00e4a15b56b09741673c3d9092fc94c876f68f8ff3
 ENV SWIG_DOWNLOAD_SHA512=c71b860c64bc8d3148513729ef719128342318f80f5b63a43663eae4172acc3628d91f394acf2496dadebb474f2a7a710a83714b53febfb0febd3cc986dde568
 ENV GO_DOWNLOAD_SHA512=6b5f6a5b95df6a9c0e54d39b2d925427720e513160f757e51d8232360f83f7f6004c3afd410f6efc5d0667b523ea21f03d8d14cd0e31902009e0246c5c2a18c8
@@ -23,9 +25,10 @@ RUN set -eux \
 
 # Install GridDB C Client
 RUN cd /etc/yum.repos.d/ \
-    && wget -q --no-check-certificate https://download.opensuse.org/repositories/home:knonomura/CentOS_7/home:knonomura.repo \
-    && yum install -y griddb-c-client \
-    && yum clean all
+    && wget -q --no-check-certificate https://github.com/griddb/c_client/releases/download/v${GRIDDB_C_VERSION}/griddb-c-client-${GRIDDB_C_VERSION}-linux.x86_64.rpm \
+    && yum install -y ./griddb-c-client-${GRIDDB_C_VERSION}-linux.x86_64.rpm \
+    && yum clean all \
+    && rm griddb-c-client-${GRIDDB_C_VERSION}-linux.x86_64.rpm
 
 # Install swig v4.0.2 https://github.com/swig/swig/releases/tag/v4.0.2
 RUN wget -q --no-check-certificate https://github.com/swig/swig/archive/refs/tags/v${SWIG_VERSION}.tar.gz \

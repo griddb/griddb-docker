@@ -1,12 +1,14 @@
 FROM centos:centos7.9.2009
 
+ENV GRIDDB_C_VERSION=5.3.0
 ENV GRIDDB_PHP_VERSION=0.8.1
 ENV SWIG_VERSION=4.1.0
 ENV CENTOS_VERSION=7
 
+ENV GRIDDB_C_DOWNLOAD_SHA512=b7418bfc7bab5269779012a252f5c7a8d537f02e320e8f61036afde7377426b0a3a46dac541ef075b759923d9dc061743d3799f352e9bc70494eb138a2f58559
 ENV GRIDDB_PHP_DOWNLOAD_SHA512=5a7516ef41219163e64749f19187091bcff7fb4ae07b23844688398d87213b04c1410068355b4f9ce2c011f8ca82a28a66fc47b889d02891fc783c395479f690
 ENV EPEL_DOWNLOAD_SHA512=acaf8aabc5be8a8c57fb708bc38f15f3cc21f121fd4f8cb47e2fb61be222fa8bb56a55fe47880d59ebdbae90e4330daaae830f7048408fa4d304391df3f0d285
-ENV REMI_DOWNLOAD_SHA512=e0787863785c1317634f10af3f90331f731fd2025870c16753f483e4a73ecff57abed04378d0124a4c85744a29b6e3f8d8c69f4d94946542102311c8007455c1
+ENV REMI_DOWNLOAD_SHA512=61047b581ed230d3455f75c4e46217c44baa1e1b71893f59e7b6df923ddb7e5b61b2e384c940179bf8d95285c3ad533041f32f10b220fad2596dc3f10437b384
 
 RUN set -eux \
     && yum update -y \
@@ -30,9 +32,10 @@ RUN set -eux \
 
 # Install GridDB C Client
 RUN cd /etc/yum.repos.d/ \
-    && wget -q --no-check-certificate https://download.opensuse.org/repositories/home:knonomura/CentOS_7/home:knonomura.repo \
-    && yum install -y griddb-c-client \
-    && yum clean all
+    && wget -q --no-check-certificate https://github.com/griddb/c_client/releases/download/v${GRIDDB_C_VERSION}/griddb-c-client-${GRIDDB_C_VERSION}-linux.x86_64.rpm \
+    && yum install -y ./griddb-c-client-${GRIDDB_C_VERSION}-linux.x86_64.rpm \
+    && yum clean all \
+    && rm griddb-c-client-${GRIDDB_C_VERSION}-linux.x86_64.rpm
 
 # Install swig v4.1.0 https://github.com/swig/swig/releases/tag/v4.1.0
 RUN git clone https://github.com/swig/swig.git \
