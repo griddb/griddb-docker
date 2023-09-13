@@ -11,7 +11,8 @@ ENV PORT=10001
 RUN set -eux \
     && yum -y update \
     # Install dependencies for griddb
-    && yum install -y wget python3 epel-release jq \
+    && yum install -y wget python3 epel-release \
+    && yum install -y jq \
     && yum clean all \
     # Download package griddb server
     && wget -q https://github.com/griddb/griddb/releases/download/v${GRIDDB_VERSION}/griddb-${GRIDDB_VERSION}-linux.x86_64.rpm --no-check-certificate \
