@@ -26,6 +26,11 @@ fixlist_config() {
     jq '.cluster |= .+ {"notificationMember": [{"cluster":{"address", "port":10010}, "sync":{"address","port":10020}, "system":{"address", "port":10040}, "transaction":{"address", "port":10001}, "sql":{"address", "port":20001}}]}' tmp.json | tee tmp_gs_cluster.json >/dev/null
     mv tmp_gs_cluster.json /var/lib/gridstore/conf/gs_cluster.json
     rm tmp.json
+
+    # Add serviceAddress for Fixed_List method
+    jq --arg ip_address "$ip_address"  '. + { serviceAddress: $ip_address}'  /var/lib/gridstore/conf/gs_node.json  >  tmp_gs_node.json
+    mv tmp_gs_node.json /var/lib/gridstore/conf/gs_node.json
+
     # Set IP address
     sed -i -e s/\"address\":\ null/\"address\":\"$ip_address\"/g \/var/lib/gridstore/conf/gs_cluster.json
 }
