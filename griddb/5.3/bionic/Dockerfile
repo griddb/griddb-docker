@@ -1,8 +1,8 @@
 FROM ubuntu:18.04
 
-# You can download griddb V5.3.0 directly at https://github.com/griddb/griddb/releases/tag/v5.3.0
-ENV GRIDDB_VERSION=5.3.0
-ENV GRIDDB_DOWNLOAD_SHA512=6a2fb155e549dbdd172678220c89d69e8b187bc1ae118cdbb9111dd03fff8461065dfd6152ad292fbeceee5cc041934a62024fb8cf562c1c6c0c7f468a5403a8
+# You can download griddb V5.3.1 directly at https://github.com/griddb/griddb/releases/tag/v5.3.1
+ENV GRIDDB_VERSION=5.3.1
+ENV GRIDDB_DOWNLOAD_SHA512=d087e79665346f59fe8b9a50b9386f0805bb73da51fd3bc4f97e1737659d5f7676850abb71f7c34a038a0b48227878139f5904ac8bbc95062f4ec39887a75f12
 ENV GS_HOME=/var/lib/gridstore
 # Need declare $GS_LOG to start GridDB server
 ENV GS_LOG=/var/lib/gridstore/log
