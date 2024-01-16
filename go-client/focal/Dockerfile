@@ -2,10 +2,12 @@ FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+ENV GRIDDB_C_VERSION=5.3.0
 ENV GRIDDB_GO_VERSION=0.8.4
 ENV SWIG_VERSION=4.0.2
 ENV GO_VERSION=1.16
 
+ENV GRIDDB_C_DOWNLOAD_SHA512=a9a766c87851d1f3945fbc9706523399448d4517272cf9d9bc3415b4278d6d650b75c8c5446501d3cd6420c68b6e1887b7cb9a2cc42a6a357257cc0fd8cf6ee2
 ENV GRIDDB_GO_DOWNLOAD_SHA512=23da4e91507888132991d017277f461374b8191c8d5c16d77fc0ff44badbf0e89464eb56e666d17115334c00e4a15b56b09741673c3d9092fc94c876f68f8ff3
 ENV SWIG_DOWNLOAD_SHA512=c71b860c64bc8d3148513729ef719128342318f80f5b63a43663eae4172acc3628d91f394acf2496dadebb474f2a7a710a83714b53febfb0febd3cc986dde568
 ENV GO_DOWNLOAD_SHA512=6b5f6a5b95df6a9c0e54d39b2d925427720e513160f757e51d8232360f83f7f6004c3afd410f6efc5d0667b523ea21f03d8d14cd0e31902009e0246c5c2a18c8
@@ -24,12 +26,11 @@ RUN set -eux \
     && rm -rf /var/lib/apt/lists/*
 
 # Install GridDB C Client
-RUN echo 'deb http://download.opensuse.org/repositories/home:/knonomura/xUbuntu_18.04/ /' | tee /etc/apt/sources.list.d/home:knonomura.list \
-    && curl -fsSL https://download.opensuse.org/repositories/home:knonomura/xUbuntu_18.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_knonomura.gpg > /dev/null \
-    && apt-get -o Acquire::AllowInsecureRepositories=true -o Acquire::AllowDowngradeToInsecureRepositories=true update \
-    && apt-get install --no-install-recommends -y --allow-unauthenticated griddb-c-client \
+RUN curl -L -k https://github.com/griddb/c_client/releases/download/v${GRIDDB_C_VERSION}/griddb-c-client_${GRIDDB_C_VERSION}_amd64.deb -o griddb-c-client_${GRIDDB_C_VERSION}_amd64.deb -sS \
+    && echo "$GRIDDB_C_DOWNLOAD_SHA512 griddb-c-client_${GRIDDB_C_VERSION}_amd64.deb" | sha512sum --strict --check \
+    && apt install --no-install-recommends -y --allow-unauthenticated ./griddb-c-client_${GRIDDB_C_VERSION}_amd64.deb \
     && apt-get clean all \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* && rm griddb-c-client_${GRIDDB_C_VERSION}_amd64.deb
 
 # Copy entrypoint script and sample for fixlist
 COPY run-griddb.sh sample1_fixlist.go /root/
