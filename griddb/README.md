@@ -1,5 +1,14 @@
 # Supported tags and respective Dockerfile links
-* [5.0.0-bionic, latest](https://github.com/griddb/griddb-docker/blob/main/griddb/5.0/bionic/Dockerfile)
+* [5.6.0-jammy, latest](https://github.com/griddb/griddb-docker/blob/main/griddb/5.6/jammy/Dockerfile)
+* [5.6.0-focal](https://github.com/griddb/griddb-docker/blob/main/griddb/5.6/focal/Dockerfile)
+* [5.6.0-centos7](https://github.com/griddb/griddb-docker/blob/main/griddb/5.6/centos7/Dockerfile)
+* [5.6.0-rockylinux9](https://github.com/griddb/griddb-docker/blob/main/griddb/5.6/rockylinux9/Dockerfile)
+* [5.5.0-jammy](https://github.com/griddb/griddb-docker/blob/main/griddb/5.5/jammy/Dockerfile)
+* [5.5.0-focal](https://github.com/griddb/griddb-docker/blob/main/griddb/5.5/focal/Dockerfile)
+* [5.5.0-centos7](https://github.com/griddb/griddb-docker/blob/main/griddb/5.5/centos7/Dockerfile)
+* [5.3.1-focal](https://github.com/griddb/griddb-docker/blob/main/griddb/5.3/focal/Dockerfile)
+* [5.3.1-centos7](https://github.com/griddb/griddb-docker/blob/main/griddb/5.3/centos7/Dockerfile)
+* [5.0.0-bionic](https://github.com/griddb/griddb-docker/blob/main/griddb/5.0/bionic/Dockerfile)
 * [5.0.0-focal](https://github.com/griddb/griddb-docker/blob/main/griddb/5.0/focal/Dockerfile)
 * [5.0.0-centos7](https://github.com/griddb/griddb-docker/blob/main/griddb/5.0/centos7/Dockerfile)
 * [4.6.1-bionic](https://github.com/griddb/griddb-docker/blob/main/griddb/4.6/bionic/Dockerfile)
@@ -108,7 +117,7 @@ docker run --name container_name \
     griddb/griddb
 ```
 Note :
-* GridDB version 4.5, 4.6 and 5.0 CE support 1 member for fixed list method.
+* GridDB CE of the version since 4.5 supports only 1 member for fixed list method.
 * GridDB use option --network="host" to forward ports.
 
 # Execute a sample program (GriddB server on Ubuntu)
@@ -198,8 +207,8 @@ The griddb images come in many flavors, each designed for a specific use case.
 ## ```griddb/griddb```
 * This is default image of GridDB server.
 
-## ```griddb/griddb:<version>-centos8```
-* This is image of GridDB server on CentOS. This image dedicated of GridDB server on CentOS 8.
+## ```griddb/griddb:<version>-jammy```
+* This is image of GridDB server on Ubuntu. This image dedicated of GridDB server on Ubuntu 22.04.
 
 ## ```griddb/griddb:<version>-focal```
 * This is image of GridDB server on Ubuntu. This image dedicated of GridDB server on Ubuntu 20.04.
@@ -207,8 +216,8 @@ The griddb images come in many flavors, each designed for a specific use case.
 ## ```griddb/griddb:<version>-centos7```
 * This is image of GridDB server on CentOS. This image dedicated of GridDB server on CentOS 7.
 
-## ```griddb/griddb:<version>-bionic```
-* This is image of GridDB server on Ubuntu. This image dedicated of GridDB server on Ubuntu 18.04.
+## ```griddb/griddb:<version>-rockylinux9```
+* This is image of GridDB server on RockyLinux. This image dedicated of GridDB server on RockyLinux 9.
 
 # License
 
